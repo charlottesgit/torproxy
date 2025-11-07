@@ -6,6 +6,9 @@ Install using:
 ` cd torproxy `
 <br>
 
-` sudo bash install.sh `
+` su `
+<br>
+
+` bash install.sh `
 
 NOTE: Insalls for the user running the command only.
