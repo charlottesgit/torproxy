@@ -1,0 +1,27 @@
+#!/bin/bash
+
+torproxy () {
+	if [ "$1" = "set" ]; then
+		PROXIES=( "http_proxy" "ftp_proxy" "https_proxy" "all_proxy" "HTTP_PROXY" "HTTPS_PROXY" "FTP_PROXY" "ALL_PROXY" )
+		for envar in "${PROXIES[@]}"
+		do
+			export $envar=socks5://localhost:9050
+		done
+		for envar in "no_proxy NO_PROXY"
+		do
+			export $envar=localhost
+		done
+		echo [Tor Connected]
+	elif [ "$1" = "clear" ]; then
+		PROXIES=( "http_proxy" "ftp_proxy" "https_proxy" "all_proxy" "HTTP_PROXY" "HTTPS_PROXY" "FTP_PROXY" "ALL_PROXY" )
+		for envar in "${PROXIES[@]}"
+		do
+			unset $envar
+		done
+		echo [Tor Disconnected]
+	else
+		echo [Error - Use Commands "set" or "clear"]
+	fi	
+}
+
+"$@"
